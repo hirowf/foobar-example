@@ -1,0 +1,20 @@
+<form [formGroup]=userForm>
+  <input formControlName="name" />
+</form>
+
+<button (click)="searchName()"></button>
+
+@for(user of users; track user.id) {
+<section class="container">
+  <div class="user-card">
+    <div>
+      <span>{{ user.name }}</span>
+
+    </div>
+    <div>
+      <span>{{ user.email }}</span>
+    </div>
+
+  </div>
+</section>
+}
