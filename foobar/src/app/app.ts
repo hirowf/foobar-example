@@ -14,22 +14,27 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 export class App implements OnInit {
   userService = inject(UserService);
   users: User[] = [];
+  filteredUsers: User[] = [];
 
   userForm = new FormGroup({
-    name: new FormControl<string>('')
-  })
-
+    name: new FormControl<string>(''),
+  });
+  
   searchName() {
-    this.userForm.controls.name.value
+    const searchTerm = this.userForm.controls.name.value?.toLowerCase() ?? '';
 
-    this.users.map(n => {
-      this.users.filter(id => n.id === id);
-    })
+    this.filteredUsers = this.users.filter(user =>
+      user.name.toLowerCase().includes(searchTerm)
+    );
   }
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe({
-      next: u => this.users = u,
+      next: u => {
+        this.users = u;
+        this.filteredUsers = u;
+      },
     });
   }
 }
+

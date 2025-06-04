@@ -1,20 +1,18 @@
-<form [formGroup]=userForm>
-  <input formControlName="name" />
+<form [formGroup]="userForm">
+  <input formControlName="name" placeholder="Search by name" />
 </form>
 
-<button (click)="searchName()"></button>
+<button (click)="searchName()">Search</button>
 
-@for(user of users; track user.id) {
-<section class="container">
-  <div class="user-card">
-    <div>
-      <span>{{ user.name }}</span>
-
+@for (user of filteredUsers; track user.id) {
+  <section class="container">
+    <div class="user-card">
+      <div>
+        <span>{{ user.name }}</span>
+      </div>
+      <div>
+        <span>{{ user.email }}</span>
+      </div>
     </div>
-    <div>
-      <span>{{ user.email }}</span>
-    </div>
-
-  </div>
-</section>
+  </section>
 }
